@@ -19,7 +19,9 @@ from app.garmin.port import GarminGateway
 from app.store.models import GarminSession, SyncRun
 from app.sync import service
 
-router = APIRouter(prefix="/api/sync", tags=["sync"])
+router = APIRouter(
+    prefix="/api/sync", tags=["sync"], dependencies=[Depends(deps.require_api_key)]
+)
 
 
 @router.post("", status_code=202)
@@ -81,8 +83,8 @@ def get_run(run_id: uuid.UUID, session: Session = Depends(deps.get_db)) -> dict[
 
 @router.post("/unlock")
 def unlock(session: Session = Depends(deps.get_db)) -> dict[str, bool]:
-    """API-key-guarded per design.md — the guard itself lands in Phase 6's
-    `api/security.py`; this route is otherwise complete and functional."""
+    """API-key-guarded per design.md, via the router-level `require_api_key`
+    dependency (`app/api/security.py`, Phase 6 task 6.3)."""
     breaker = session.get(GarminSession, 1)
     if breaker is not None:
         breaker.auth_locked = False

@@ -19,9 +19,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.api import deps
+from app.config import get_settings
 from app.garmin.fake import FakeGarminGateway
 from app.main import app
 from app.store.models import Base, GarminSession, SyncRun
+
+API_KEY = get_settings().api_key
 
 
 @pytest.fixture()
@@ -47,7 +50,11 @@ def client(postgres_container: str) -> Iterator[TestClient]:
     app.dependency_overrides[deps.get_db] = _override_get_db
     app.dependency_overrides[deps.get_garmin_gateway] = _override_gateway
 
-    with TestClient(app) as test_client:
+    # `X-API-Key` is exercised for real here (no dependency override) —
+    # Phase 6 task 6.3 retroactively guards every `/api/sync/*` route,
+    # `/unlock` included (was explicitly unauthenticated in PR5, see
+    # apply-progress Deviation #5).
+    with TestClient(app, headers={"X-API-Key": API_KEY}) as test_client:
         yield test_client
 
     app.dependency_overrides.clear()
@@ -143,3 +150,18 @@ def test_no_garmin_credential_or_session_token_ever_appears_in_a_response(
         body_text = response.text.lower()
         assert "password" not in body_text
         assert "token" not in body_text
+
+
+def test_trigger_sync_without_api_key_is_rejected(client: TestClient) -> None:
+    response = client.post("/api/sync", headers={"X-API-Key": ""})
+
+    assert response.status_code in (401, 403)
+
+
+def test_unlock_without_api_key_is_rejected(client: TestClient) -> None:
+    """PR5 left `/unlock` explicitly unauthenticated pending this task
+    (apply-progress Deviation #5) — now it must reject like every other
+    `/api/sync/*` route."""
+    response = client.post("/api/sync/unlock", headers={"X-API-Key": ""})
+
+    assert response.status_code in (401, 403)
