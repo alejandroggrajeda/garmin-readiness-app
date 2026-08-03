@@ -153,6 +153,22 @@ def get_rolling_baseline(
     )
 
 
+def get_latest_metric_date(
+    session: Session, *, on_or_before: dt.date
+) -> dt.date | None:
+    """The most recent `daily_metrics.metric_date` on or before
+    `on_or_before`, or `None` if no rows exist yet.
+
+    Phase 6 (readiness-api) support: `GET /api/readiness/today`'s stale
+    fallback needs to know which day's data to score when today's row is
+    missing (e.g. the latest manual sync failed or hasn't happened yet).
+    """
+    stmt = select(func.max(DailyMetric.metric_date)).where(
+        DailyMetric.metric_date <= on_or_before
+    )
+    return session.scalar(stmt)
+
+
 def count_usable_days(session: Session, *, as_of: dt.date) -> int:
     """Total number of `daily_metrics` rows on or before `as_of`.
 
