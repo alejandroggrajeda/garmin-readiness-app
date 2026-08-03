@@ -17,7 +17,7 @@ Los valores configurables son:
 | `z_to_points_slope` | Cuántos puntos (sobre 100) mueve una desviación estándar respecto a tu baseline personal. |
 | `tie_threshold` | Qué tan cerca tienen que estar dos factores para considerarse "empatados" como causa dominante (hoy: 0.10 desviaciones estándar). |
 | `insufficient_coverage_threshold` | Por debajo de qué % de factores disponibles el resultado pasa a "insuficiente" (hoy: 60%). |
-| `calibrating_below_days` | Debajo de cuántos días de historial se muestra "calibrando" en vez de un número (hoy: 14 días). |
+| `calibrating_below_days` | Debajo de cuántos días de historial se muestra "calibrando" en vez de un número (hoy: 60 días, alineado con el spec — no hay rango parcial de 14-59 días). |
 | `full_confidence_at_days` | A partir de cuántos días la confianza llega a 100% (hoy: 60 días). |
 | `band_thresholds` | Los cortes de score que definen las bandas de recomendación: entrenar fuerte / moderado / suave / descansar (hoy: 80 / 60 / 40). |
 

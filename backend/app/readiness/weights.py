@@ -57,8 +57,14 @@ DEFAULT_WEIGHTS = ScoringWeights(
     tie_threshold=0.10,
     # design.md: "<60% coverage -> insufficient".
     insufficient_coverage_threshold=0.60,
-    # design.md: "<14 days -> calibrating".
-    calibrating_below_days=14,
+    # spec.md (readiness-scoring, "Calibrating State"): "While fewer than 60
+    # days of baseline-dependent history exist ... return a 'calibrating'
+    # state instead of a numeric score." design.md rev2 had drifted to an
+    # incorrect 14-day figure (silently, never reconciled against spec.md
+    # until sdd-verify caught it); this is now corrected to match spec.md's
+    # literal 60-day requirement -- the binary calibrating/scored transition
+    # spec.md describes has no 14-59 day partial-confidence range.
+    calibrating_below_days=60,
     # design.md: "confidence = usable_days / 60", capped at 1.0 for
     # usable_days >= 60.
     full_confidence_at_days=60,

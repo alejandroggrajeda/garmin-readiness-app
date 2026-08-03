@@ -46,13 +46,14 @@ def _snapshot(
 
 
 # ---------------------------------------------------------------------------
-# Calibrating state (cold start, <14 usable days)
+# Calibrating state (cold start, <60 usable days — spec.md's literal
+# "fewer than 60 days of baseline-dependent history" requirement)
 # ---------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize(
     ("usable_days", "expected_days_remaining"),
-    [(0, 14), (5, 9), (13, 1)],
+    [(0, 60), (5, 55), (13, 47), (14, 46), (59, 1)],
 )
 def test_cold_start_returns_calibrating_with_days_remaining(
     usable_days: int, expected_days_remaining: int
@@ -70,31 +71,48 @@ def test_cold_start_returns_calibrating_with_days_remaining(
     assert result.weights_version == DEFAULT_WEIGHTS.version
 
 
-def test_fourteen_usable_days_is_no_longer_calibrating() -> None:
-    """14 usable days is the exact boundary — design.md: `<14 → calibrating`,
-    `14-59 → scored`."""
+def test_fourteen_usable_days_is_still_calibrating() -> None:
+    """14 usable days is well inside the calibrating range per spec.md's
+    60-day "Cold start" scenario. design.md rev2 had drifted to a 14-day
+    boundary (now corrected); 14 usable days must NOT produce a score."""
     snapshot = _snapshot(14, {name: 50 for name in DEFAULT_WEIGHTS.factor_weights})
     result = compute_readiness(snapshot, DEFAULT_WEIGHTS)
 
-    assert result.state != "calibrating"
+    assert result.state == "calibrating"
+    assert result.score is None
+
+
+def test_sixty_usable_days_transitions_to_scored() -> None:
+    """spec.md's "Transition to scored state" scenario: at exactly 60 days
+    of history the result becomes a numeric score with breakdown and band —
+    the only transition boundary the spec describes (no 14-59 day partial
+    range)."""
+    snapshot = _snapshot(60, {name: 50 for name in DEFAULT_WEIGHTS.factor_weights})
+    result = compute_readiness(snapshot, DEFAULT_WEIGHTS)
+
+    assert result.state == "scored"
+    assert result.score is not None
+    assert result.band is not None
+    assert result.confidence == 1.0
 
 
 # ---------------------------------------------------------------------------
-# Confidence: usable_days / 60, capped at 1.0 for usable_days >= 60
+# Confidence: full (1.0) as soon as scoring starts. Since
+# `calibrating_below_days` and `full_confidence_at_days` are both 60, there
+# is no 14-59 day partial-confidence gradient — spec.md only describes a
+# binary calibrating/scored transition at 60 days, not a partial range.
 # ---------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize(
-    ("usable_days", "expected_confidence"),
-    [(14, 14 / 60), (59, 59 / 60), (60, 1.0), (365, 1.0)],
+    "usable_days",
+    [60, 90, 365],
 )
-def test_confidence_scales_with_usable_days_up_to_sixty(
-    usable_days: int, expected_confidence: float
-) -> None:
+def test_confidence_is_full_once_scoring_starts(usable_days: int) -> None:
     snapshot = _snapshot(usable_days, {name: 50 for name in DEFAULT_WEIGHTS.factor_weights})
     result = compute_readiness(snapshot, DEFAULT_WEIGHTS)
 
-    assert result.confidence == pytest.approx(expected_confidence)
+    assert result.confidence == pytest.approx(1.0)
 
 
 # ---------------------------------------------------------------------------
