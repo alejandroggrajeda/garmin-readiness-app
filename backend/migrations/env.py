@@ -6,6 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from app.config import get_settings
+from app.store.models import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -21,10 +22,7 @@ if config.config_file_name is not None:
 # endpoint per design.md, not the "-pooler" host.
 config.set_main_option("sqlalchemy.url", get_settings().database_url)
 
-# Phase 3 (health-metrics-store) will import `app.store.models` here and set
-# target_metadata = Base.metadata to enable autogenerate; no models exist
-# yet in Phase 1.
-target_metadata = None
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
