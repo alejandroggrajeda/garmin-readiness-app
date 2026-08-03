@@ -1,0 +1,29 @@
+# Render Blueprint — $0/month deploy surface.
+# See design.md, "Hosting — Render free web service, native Python runtime".
+#
+# No Dockerfile: the native Python buildpack builds and wakes faster than a
+# container image on the free tier. Migrations run on every wake (idempotent,
+# ~1s cost) because there is no separate release/scheduler process in this
+# design — every write starts from an inbound HTTP request.
+services:
+  - type: web
+    name: garmin-readiness-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -e .
+    startCommand: "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DATABASE_URL
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: GARMIN_EMAIL
+        sync: false
+      - key: GARMIN_PASSWORD
+        sync: false
+      - key: GARMIN_SECRET_KEY
+        sync: false
