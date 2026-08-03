@@ -1,0 +1,40 @@
+{
+  "2026-01-15": {
+    "userProfilePK": 1,
+    "mostRecentTrainingStatus": {
+      "latestTrainingStatusData": {
+        "1": {
+          "calendarDate": "2026-01-15",
+          "trainingStatus": 4,
+          "trainingStatusFeedbackPhrase": "PRODUCTIVE",
+          "acuteTrainingLoadDTO": {
+            "dailyTrainingLoadAcute": 281,
+            "dailyTrainingLoadChronic": 331,
+            "dailyAcuteChronicWorkloadRatio": 0.85,
+            "minTrainingLoadChronic": 291,
+            "maxTrainingLoadChronic": 371
+          }
+        }
+      }
+    }
+  },
+  "2026-01-16": {
+    "userProfilePK": 1,
+    "mostRecentTrainingStatus": {
+      "latestTrainingStatusData": {
+        "1": {
+          "calendarDate": "2026-01-16",
+          "trainingStatus": 4,
+          "trainingStatusFeedbackPhrase": "PRODUCTIVE",
+          "acuteTrainingLoadDTO": {
+            "dailyTrainingLoadAcute": 282,
+            "dailyTrainingLoadChronic": 332,
+            "dailyAcuteChronicWorkloadRatio": 0.85,
+            "minTrainingLoadChronic": 292,
+            "maxTrainingLoadChronic": 372
+          }
+        }
+      }
+    }
+  }
+}

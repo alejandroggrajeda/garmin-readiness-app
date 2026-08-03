@@ -12,6 +12,7 @@ dependencies = [
     "pydantic==2.13.4",
     "pydantic-settings==2.14.2",
     "cryptography==44.0.0",
+    "garminconnect==0.3.8",
 ]
 
 [project.optional-dependencies]
