@@ -1,50 +1,90 @@
 {
-  "2026-01-15": {
-    "userProfilePK": 1,
+  "2026-08-02": {
+    "userProfilePk": 148384319,
     "hrvSummary": {
-      "calendarDate": "2026-01-15",
-      "weeklyAvg": 48.0,
-      "lastNightAvg": 53.0,
-      "lastNight5MinHigh": 65.0,
-      "status": "BALANCED",
-      "feedbackPhrase": "HRV_BALANCED_7",
+      "calendarDate": "2026-08-02",
+      "weeklyAvg": 35,
+      "lastNightAvg": 30,
+      "lastNight5MinHigh": 44,
       "baseline": {
-        "lowUpper": 30.0,
-        "balancedLow": 35.0,
-        "balancedUpper": 60.0,
-        "markerValue": 0.5
-      }
+        "lowUpper": 34,
+        "balancedLow": 36,
+        "balancedUpper": 41,
+        "markerValue": 0.21226501
+      },
+      "status": "UNBALANCED",
+      "feedbackPhrase": "HRV_UNBALANCED_12",
+      "createTimeStamp": "2026-08-02T13:30:30.689"
     },
-    "hrvReadings": [],
-    "startTimestampGMT": "2026-01-15T05:30:00.0",
-    "endTimestampGMT": "2026-01-15T12:15:00.0",
-    "startTimestampLocal": "2026-01-15T22:30:00.0",
-    "endTimestampLocal": "2026-01-15T05:15:00.0",
-    "sleepStartTimestampGMT": "2026-01-15T05:30:00.0",
-    "sleepEndTimestampGMT": "2026-01-15T12:15:00.0"
-  },
-  "2026-01-16": {
-    "userProfilePK": 1,
-    "hrvSummary": {
-      "calendarDate": "2026-01-16",
-      "weeklyAvg": 48.0,
-      "lastNightAvg": 54.0,
-      "lastNight5MinHigh": 66.0,
-      "status": "BALANCED",
-      "feedbackPhrase": "HRV_BALANCED_7",
-      "baseline": {
-        "lowUpper": 30.0,
-        "balancedLow": 35.0,
-        "balancedUpper": 60.0,
-        "markerValue": 0.5
+    "hrvReadings": [
+      {
+        "hrvValue": 25,
+        "readingTimeGMT": "2026-08-02T06:00:50.0",
+        "readingTimeLocal": "2026-08-02T00:00:50.0"
+      },
+      {
+        "hrvValue": 20,
+        "readingTimeGMT": "2026-08-02T06:05:50.0",
+        "readingTimeLocal": "2026-08-02T00:05:50.0"
+      },
+      {
+        "hrvValue": 24,
+        "readingTimeGMT": "2026-08-02T06:10:50.0",
+        "readingTimeLocal": "2026-08-02T00:10:50.0"
+      },
+      {
+        "hrvValue": 25,
+        "readingTimeGMT": "2026-08-02T06:15:50.0",
+        "readingTimeLocal": "2026-08-02T00:15:50.0"
+      },
+      {
+        "hrvValue": 38,
+        "readingTimeGMT": "2026-08-02T06:20:50.0",
+        "readingTimeLocal": "2026-08-02T00:20:50.0"
+      },
+      {
+        "hrvValue": 39,
+        "readingTimeGMT": "2026-08-02T06:25:50.0",
+        "readingTimeLocal": "2026-08-02T00:25:50.0"
+      },
+      {
+        "hrvValue": 34,
+        "readingTimeGMT": "2026-08-02T06:30:50.0",
+        "readingTimeLocal": "2026-08-02T00:30:50.0"
+      },
+      {
+        "hrvValue": 36,
+        "readingTimeGMT": "2026-08-02T06:35:50.0",
+        "readingTimeLocal": "2026-08-02T00:35:50.0"
+      },
+      {
+        "hrvValue": 20,
+        "readingTimeGMT": "2026-08-02T06:40:50.0",
+        "readingTimeLocal": "2026-08-02T00:40:50.0"
+      },
+      {
+        "hrvValue": 20,
+        "readingTimeGMT": "2026-08-02T06:45:50.0",
+        "readingTimeLocal": "2026-08-02T00:45:50.0"
+      },
+      {
+        "hrvValue": 28,
+        "readingTimeGMT": "2026-08-02T06:50:50.0",
+        "readingTimeLocal": "2026-08-02T00:50:50.0"
+      },
+      {
+        "hrvValue": 36,
+        "readingTimeGMT": "2026-08-02T06:55:50.0",
+        "readingTimeLocal": "2026-08-02T00:55:50.0"
       }
-    },
-    "hrvReadings": [],
-    "startTimestampGMT": "2026-01-16T05:30:00.0",
-    "endTimestampGMT": "2026-01-16T12:15:00.0",
-    "startTimestampLocal": "2026-01-16T22:30:00.0",
-    "endTimestampLocal": "2026-01-16T05:15:00.0",
-    "sleepStartTimestampGMT": "2026-01-16T05:30:00.0",
-    "sleepEndTimestampGMT": "2026-01-16T12:15:00.0"
+    ],
+    "startTimestampGMT": "2026-08-02T06:00:42.0",
+    "endTimestampGMT": "2026-08-02T13:25:50.0",
+    "startTimestampLocal": "2026-08-02T00:00:42.0",
+    "endTimestampLocal": "2026-08-02T07:25:50.0",
+    "sleepStartTimestampGMT": "2026-08-02T06:00:42.0",
+    "sleepEndTimestampGMT": "2026-08-02T13:30:09.0",
+    "sleepStartTimestampLocal": "2026-08-02T00:00:42.0",
+    "sleepEndTimestampLocal": "2026-08-02T07:30:09.0"
   }
 }

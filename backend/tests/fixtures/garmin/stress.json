@@ -1,22 +1,166 @@
 {
-  "2026-01-15": {
-    "userProfilePK": 1,
-    "calendarDate": "2026-01-15",
-    "avgStressLevel": 31,
-    "maxStressLevel": 71,
+  "2026-08-02": {
+    "userProfilePK": 148384319,
+    "calendarDate": "2026-08-02",
+    "startTimestampGMT": "2026-08-02T06:00:00.0",
+    "endTimestampGMT": "2026-08-03T06:00:00.0",
+    "startTimestampLocal": "2026-08-02T00:00:00.0",
+    "endTimestampLocal": "2026-08-03T00:00:00.0",
+    "maxStressLevel": 94,
+    "avgStressLevel": 30,
     "stressChartValueOffset": 1,
     "stressChartYAxisOrigin": -1,
-    "stressValueDescriptorsDTOList": [],
-    "stressValuesArray": []
-  },
-  "2026-01-16": {
-    "userProfilePK": 1,
-    "calendarDate": "2026-01-16",
-    "avgStressLevel": 32,
-    "maxStressLevel": 72,
-    "stressChartValueOffset": 1,
-    "stressChartYAxisOrigin": -1,
-    "stressValueDescriptorsDTOList": [],
-    "stressValuesArray": []
+    "stressValueDescriptorsDTOList": [
+      {
+        "index": 0,
+        "key": "timestamp"
+      },
+      {
+        "index": 1,
+        "key": "stressLevel"
+      }
+    ],
+    "stressValuesArray": [
+      [
+        1785650400000,
+        25
+      ],
+      [
+        1785650580000,
+        25
+      ],
+      [
+        1785650760000,
+        22
+      ],
+      [
+        1785650940000,
+        22
+      ],
+      [
+        1785651120000,
+        21
+      ],
+      [
+        1785651300000,
+        22
+      ],
+      [
+        1785651480000,
+        12
+      ],
+      [
+        1785651660000,
+        12
+      ],
+      [
+        1785651840000,
+        31
+      ],
+      [
+        1785652020000,
+        17
+      ],
+      [
+        1785652200000,
+        14
+      ],
+      [
+        1785652380000,
+        15
+      ]
+    ],
+    "bodyBatteryValueDescriptorsDTOList": [
+      {
+        "bodyBatteryValueDescriptorIndex": 0,
+        "bodyBatteryValueDescriptorKey": "timestamp"
+      },
+      {
+        "bodyBatteryValueDescriptorIndex": 1,
+        "bodyBatteryValueDescriptorKey": "bodyBatteryStatus"
+      },
+      {
+        "bodyBatteryValueDescriptorIndex": 2,
+        "bodyBatteryValueDescriptorKey": "bodyBatteryLevel"
+      },
+      {
+        "bodyBatteryValueDescriptorIndex": 3,
+        "bodyBatteryValueDescriptorKey": "bodyBatteryVersion"
+      }
+    ],
+    "bodyBatteryValuesArray": [
+      [
+        1785650400000,
+        "MEASURED",
+        5,
+        3.0
+      ],
+      [
+        1785650580000,
+        "MEASURED",
+        5,
+        3.0
+      ],
+      [
+        1785650760000,
+        "MEASURED",
+        5,
+        3.0
+      ],
+      [
+        1785650940000,
+        "MEASURED",
+        5,
+        3.0
+      ],
+      [
+        1785651120000,
+        "MEASURED",
+        5,
+        3.0
+      ],
+      [
+        1785651300000,
+        "MEASURED",
+        6,
+        3.0
+      ],
+      [
+        1785651480000,
+        "MEASURED",
+        6,
+        3.0
+      ],
+      [
+        1785651660000,
+        "MEASURED",
+        6,
+        3.0
+      ],
+      [
+        1785651840000,
+        "MEASURED",
+        7,
+        3.0
+      ],
+      [
+        1785652020000,
+        "MEASURED",
+        7,
+        3.0
+      ],
+      [
+        1785652200000,
+        "MEASURED",
+        7,
+        3.0
+      ],
+      [
+        1785652380000,
+        "MEASURED",
+        7,
+        3.0
+      ]
+    ]
   }
 }
