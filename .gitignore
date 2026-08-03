@@ -45,4 +45,4 @@ Thumbs.db
 
 # --- Misc ---
 *.log
-.atl/.skill-registry.cache.json
+.atl/
