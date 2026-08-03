@@ -105,3 +105,22 @@ def test_fetch_hrv_returns_empty_dict_when_client_returns_none() -> None:
     client.get_hrv_data = lambda cdate: None
     gateway = _adapter(client)
     assert gateway.fetch_hrv(dt.date(2026, 1, 1)) == {}
+
+
+def test_unmapped_library_exception_maps_to_typed_network_error() -> None:
+    # Reproduces a real incident: garth (the auth library garminconnect
+    # wraps) exhausted its own internal login-backend fallbacks (mobile+cffi,
+    # mobile+requests) after repeated 429s and raised an exception type that
+    # garminconnect itself never re-raises as one of its three documented
+    # error classes. Previously this escaped `_call()` unmapped, crashed the
+    # ASGI app mid-request, and left the sync_runs row stuck at "running"
+    # forever since `execute_and_release`'s except clauses never fired.
+    class _UnmappedLibraryError(Exception):
+        """Stands in for e.g. garth.exc.GarthHTTPError — anything the
+        garminconnect package doesn't itself wrap."""
+
+    client = _RaisingClient(_UnmappedLibraryError("mobile+requests returned 429"))
+    gateway = _adapter(client)
+    with pytest.raises(GarminNetworkError):
+        gateway.login()
+    assert client.login_call_count == 1

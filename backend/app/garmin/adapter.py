@@ -138,7 +138,20 @@ class GarminConnectGateway:
     def _call(fn: Any) -> Any:
         """Runs `fn()` and maps the real library's exceptions onto this
         codebase's typed `GarminGatewayError` hierarchy. Centralized here so
-        every fetch_* method (and login) shares one mapping policy."""
+        every fetch_* method (and login) shares one mapping policy.
+
+        The catch-all below exists because `garminconnect`'s three
+        documented error classes don't cover everything: `garth` (the auth
+        library `garminconnect` wraps) can exhaust its own internal
+        login-backend fallbacks and raise its own exception type, which
+        `garminconnect` never re-wraps. Left unmapped, that escaped `_call()`
+        entirely in production, crashed the ASGI request mid-flight, and
+        left the `sync_runs` row stuck at "running" forever since
+        `execute_and_release`'s typed except clauses never fired. Anything
+        unrecognized is treated as a network-layer failure — the safest
+        default, since it still engages the same non-retry/non-fatal path
+        as a confirmed connection error rather than crashing the request.
+        """
         try:
             return fn()
         except GarminConnectAuthenticationError as exc:
@@ -146,4 +159,6 @@ class GarminConnectGateway:
         except GarminConnectTooManyRequestsError as exc:
             raise GarminRateLimitError(str(exc)) from exc
         except GarminConnectConnectionError as exc:
+            raise GarminNetworkError(str(exc)) from exc
+        except Exception as exc:
             raise GarminNetworkError(str(exc)) from exc
