@@ -28,7 +28,7 @@ from __future__ import annotations
 import datetime as dt
 import uuid
 
-from sqlalchemy import DateTime, JSON, Numeric, String, func
+from sqlalchemy import DateTime, ForeignKey, JSON, LargeBinary, Numeric, String, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -57,9 +57,9 @@ class RawPayload(Base):
 class DailyMetric(Base):
     """Derived, upserted per-day metrics cache. One row per `metric_date`.
 
-    `source_run_id` forward-references `sync_runs.id` (Phase 5, not yet
-    created) as a plain nullable UUID column with no FK constraint — the
-    FK is added in the Phase 5 migration once `sync_runs` exists.
+    `source_run_id` references `sync_runs.id` (Phase 5). The FK constraint
+    was deferred until this migration since `sync_runs` did not exist when
+    `daily_metrics` was first created (Phase 3).
     """
 
     __tablename__ = "daily_metrics"
@@ -81,4 +81,64 @@ class DailyMetric(Base):
     synced_at: Mapped[dt.datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
-    source_run_id: Mapped[uuid.UUID | None] = mapped_column(nullable=True)
+    source_run_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("sync_runs.id"), nullable=True
+    )
+
+
+class SyncRun(Base):
+    """One row per manual sync attempt (garmin-sync's Manual Sync
+    requirement). `id` doubles as the `run_id` surfaced to the client on
+    `202`/`409` and polled via `GET /api/sync/runs/{id}`.
+
+    `heartbeat_at` lets `app/sync/reaper.py` detect a run whose process was
+    killed mid-sync (e.g. Render spin-down) and mark it `abandoned` instead
+    of leaving it stuck `running` forever, which would otherwise strand the
+    advisory lock's bookkeeping (the lock itself self-releases when the
+    connection drops — see design.md's "Self-healing property" — but the
+    row still needs reaping so `GET .../runs/{id}` doesn't lie).
+    """
+
+    __tablename__ = "sync_runs"
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="running")
+    started_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    heartbeat_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    completed_at: Mapped[dt.datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    error: Mapped[str | None] = mapped_column(String(1024), nullable=True)
+
+
+class GarminSession(Base):
+    """Singleton row (`id=1`) holding the cached Garmin session and the
+    auth-failure / rate-limit circuit breaker flags (design.md's "Auth
+    failures fail loudly, never retry-loop").
+
+    `token_cache_enc` is schema-ready for the Fernet-encrypted
+    `python-garminconnect` token cache; wiring the adapter to actually
+    read/write it (instead of its current filesystem `token_cache_path`)
+    is deferred past this PR — see apply-progress Deviations.
+    """
+
+    __tablename__ = "garmin_session"
+
+    id: Mapped[int] = mapped_column(primary_key=True, default=1)
+    token_cache_enc: Mapped[bytes | None] = mapped_column(
+        LargeBinary, nullable=True
+    )
+    auth_locked: Mapped[bool] = mapped_column(nullable=False, default=False)
+    cooldown_until: Mapped[dt.datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    updated_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+    )
