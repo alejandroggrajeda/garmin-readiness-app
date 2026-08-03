@@ -1,0 +1,22 @@
+{
+  "2026-01-15": {
+    "userProfilePK": 1,
+    "calendarDate": "2026-01-15",
+    "avgStressLevel": 31,
+    "maxStressLevel": 71,
+    "stressChartValueOffset": 1,
+    "stressChartYAxisOrigin": -1,
+    "stressValueDescriptorsDTOList": [],
+    "stressValuesArray": []
+  },
+  "2026-01-16": {
+    "userProfilePK": 1,
+    "calendarDate": "2026-01-16",
+    "avgStressLevel": 32,
+    "maxStressLevel": 72,
+    "stressChartValueOffset": 1,
+    "stressChartYAxisOrigin": -1,
+    "stressValueDescriptorsDTOList": [],
+    "stressValuesArray": []
+  }
+}

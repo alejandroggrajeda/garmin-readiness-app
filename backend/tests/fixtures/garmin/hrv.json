@@ -1,0 +1,50 @@
+{
+  "2026-01-15": {
+    "userProfilePK": 1,
+    "hrvSummary": {
+      "calendarDate": "2026-01-15",
+      "weeklyAvg": 48.0,
+      "lastNightAvg": 53.0,
+      "lastNight5MinHigh": 65.0,
+      "status": "BALANCED",
+      "feedbackPhrase": "HRV_BALANCED_7",
+      "baseline": {
+        "lowUpper": 30.0,
+        "balancedLow": 35.0,
+        "balancedUpper": 60.0,
+        "markerValue": 0.5
+      }
+    },
+    "hrvReadings": [],
+    "startTimestampGMT": "2026-01-15T05:30:00.0",
+    "endTimestampGMT": "2026-01-15T12:15:00.0",
+    "startTimestampLocal": "2026-01-15T22:30:00.0",
+    "endTimestampLocal": "2026-01-15T05:15:00.0",
+    "sleepStartTimestampGMT": "2026-01-15T05:30:00.0",
+    "sleepEndTimestampGMT": "2026-01-15T12:15:00.0"
+  },
+  "2026-01-16": {
+    "userProfilePK": 1,
+    "hrvSummary": {
+      "calendarDate": "2026-01-16",
+      "weeklyAvg": 48.0,
+      "lastNightAvg": 54.0,
+      "lastNight5MinHigh": 66.0,
+      "status": "BALANCED",
+      "feedbackPhrase": "HRV_BALANCED_7",
+      "baseline": {
+        "lowUpper": 30.0,
+        "balancedLow": 35.0,
+        "balancedUpper": 60.0,
+        "markerValue": 0.5
+      }
+    },
+    "hrvReadings": [],
+    "startTimestampGMT": "2026-01-16T05:30:00.0",
+    "endTimestampGMT": "2026-01-16T12:15:00.0",
+    "startTimestampLocal": "2026-01-16T22:30:00.0",
+    "endTimestampLocal": "2026-01-16T05:15:00.0",
+    "sleepStartTimestampGMT": "2026-01-16T05:30:00.0",
+    "sleepEndTimestampGMT": "2026-01-16T12:15:00.0"
+  }
+}

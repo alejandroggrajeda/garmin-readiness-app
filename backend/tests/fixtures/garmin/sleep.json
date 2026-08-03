@@ -1,0 +1,98 @@
+{
+  "2026-01-15": {
+    "dailySleepDTO": {
+      "userProfilePK": 1,
+      "calendarDate": "2026-01-15",
+      "sleepTimeSeconds": 22200,
+      "napTimeSeconds": 0,
+      "sleepWindowConfirmed": true,
+      "deepSleepSeconds": 3996,
+      "lightSleepSeconds": 12210,
+      "remSleepSeconds": 4440,
+      "awakeSleepSeconds": 1554,
+      "sleepStartTimestampGMT": "2026-01-15T05:30:00.0",
+      "sleepEndTimestampGMT": "2026-01-15T12:15:00.0",
+      "sleepStartTimestampLocal": "2026-01-15T22:30:00.0",
+      "sleepEndTimestampLocal": "2026-01-15T05:15:00.0",
+      "avgSleepHRV": 56,
+      "avgSpO2": 96.0,
+      "avgRespirationValue": 14.5,
+      "lowestRespirationValue": 12.0,
+      "highestRespirationValue": 17.0,
+      "sleepScores": {
+        "overall": {
+          "value": 71,
+          "qualifierKey": "GOOD"
+        },
+        "totalDuration": {
+          "value": 80,
+          "qualifierKey": "GOOD"
+        },
+        "stress": {
+          "value": 75,
+          "qualifierKey": "GOOD"
+        },
+        "awakeCount": {
+          "value": 90,
+          "qualifierKey": "EXCELLENT"
+        },
+        "remPercentage": {
+          "value": 70,
+          "qualifierKey": "GOOD"
+        },
+        "restlessness": {
+          "value": 78,
+          "qualifierKey": "GOOD"
+        }
+      }
+    }
+  },
+  "2026-01-16": {
+    "dailySleepDTO": {
+      "userProfilePK": 1,
+      "calendarDate": "2026-01-16",
+      "sleepTimeSeconds": 22800,
+      "napTimeSeconds": 0,
+      "sleepWindowConfirmed": true,
+      "deepSleepSeconds": 4104,
+      "lightSleepSeconds": 12540,
+      "remSleepSeconds": 4560,
+      "awakeSleepSeconds": 1596,
+      "sleepStartTimestampGMT": "2026-01-16T05:30:00.0",
+      "sleepEndTimestampGMT": "2026-01-16T12:15:00.0",
+      "sleepStartTimestampLocal": "2026-01-16T22:30:00.0",
+      "sleepEndTimestampLocal": "2026-01-16T05:15:00.0",
+      "avgSleepHRV": 57,
+      "avgSpO2": 96.0,
+      "avgRespirationValue": 14.5,
+      "lowestRespirationValue": 12.0,
+      "highestRespirationValue": 17.0,
+      "sleepScores": {
+        "overall": {
+          "value": 72,
+          "qualifierKey": "GOOD"
+        },
+        "totalDuration": {
+          "value": 80,
+          "qualifierKey": "GOOD"
+        },
+        "stress": {
+          "value": 75,
+          "qualifierKey": "GOOD"
+        },
+        "awakeCount": {
+          "value": 90,
+          "qualifierKey": "EXCELLENT"
+        },
+        "remPercentage": {
+          "value": 70,
+          "qualifierKey": "GOOD"
+        },
+        "restlessness": {
+          "value": 78,
+          "qualifierKey": "GOOD"
+        }
+      }
+    }
+  }
+}
