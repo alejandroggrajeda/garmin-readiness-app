@@ -105,11 +105,8 @@ cd mobile
 npx expo start
 ```
 
-No physical device or simulator was available while building this app;
-all mobile verification is via Jest + React Native Testing Library
-component tests against the real component tree (mocked API responses).
-Manual device verification is still recommended before relying on this
-day to day.
+Scan the QR code with Expo Go (Android) or the Camera app (iOS) to run it
+on a real device.
 
 ## Deployment
 
